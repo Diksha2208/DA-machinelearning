@@ -47,8 +47,4 @@ st.bar_chart(country_views)
 st.header('Subscribers vs. Video Views')
 st.scatter_chart(filtered_df[['subscribers', 'video views']])
 
-# Run the Streamlit app
-if __name__ == '__main__':
-    st.run()
-
 
