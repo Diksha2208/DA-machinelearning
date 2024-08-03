@@ -17,6 +17,8 @@ rank_range = st.sidebar.slider('Select rank range', min_rank, max_rank, (min_ran
 rank_df = df[(df['rank'] >= rank_range[0]) & 
                  (df['rank'] <= rank_range[1])]
 
+rank_df
+
 # Sidebar for user input
 st.sidebar.header('Filter Options')
 
