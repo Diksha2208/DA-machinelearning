@@ -11,6 +11,11 @@ df = pd.read_csv('data/Global_YouTube_Statistics.csv')
 # Title of the Streamlit app
 st.title('Global YouTube Statistics Dashboard')
 
+min_rank, max_rank = int(df['rank'].min()), int(df['rank'].max())
+rank_range = st.sidebar.slider('Select rank range', min_rank, max_rank, (min_rank, max_rank))
+
+
+
 # Sidebar for user input
 st.sidebar.header('Filter Options')
 
