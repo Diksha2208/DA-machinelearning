@@ -11,7 +11,7 @@ df = pd.read_csv('data/Global_YouTube_Statistics.csv')
 # Title of the Streamlit app
 st.title('Global YouTube Statistics Dashboard')
 
-min_rank, max_rank = int(df['rank'].min()), int(df['rank'].max())
+min_rank, max_rank = int(df['rank'].min()), 50)
 rank_range = st.sidebar.slider('Select rank range', min_rank, max_rank, (min_rank, max_rank))
 
 rank_df = df[(df['rank'] >= rank_range[0]) & 
