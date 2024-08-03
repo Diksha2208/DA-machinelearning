@@ -14,7 +14,8 @@ st.title('Global YouTube Statistics Dashboard')
 min_rank, max_rank = int(df['rank'].min()), int(df['rank'].max())
 rank_range = st.sidebar.slider('Select rank range', min_rank, max_rank, (min_rank, max_rank))
 
-
+rank_df = f df[(df['rank'] >= rank_range[0]) & 
+                 (df['rank'] <= rank_range[1])]
 
 # Sidebar for user input
 st.sidebar.header('Filter Options')
