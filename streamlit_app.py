@@ -31,13 +31,8 @@ if option == "Use example dataset":
             st.header("**Pandas Profiling Report**")
             st_profile_report(pr)
 
-@st.cache_data
-def load_data():
-    data_path = 'data/Global_YouTube_Statistics.csv'
-    df = pd.read_csv(data_path)
-    
-    return df
-df = load_data()
+
+
 
 # Title of the Streamlit app
 st.title('Global YouTube Statistics Dashboard')
