@@ -15,6 +15,7 @@ def load_data():
     df = df.dropna(subset=['subscribers', 'video views', 'uploads'])
     df = df.drop_duplicates()
     return df
+df = load_data()
 
 # Title of the Streamlit app
 st.title('Global YouTube Statistics Dashboard')
