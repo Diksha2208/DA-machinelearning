@@ -19,7 +19,7 @@ rank_df = df[(df['rank'] >= rank_range[0]) &
 
 rank_df
 # Display a bar chart of top YouTube channels by rank
-st.header('Top YouTube Channels by Rank')
+st.header('Top YouTube Channels by World Rank')
 rank_chart_df = rank_df[['Youtuber', 'rank']].set_index('Youtuber')
 st.bar_chart(rank_chart_df)
 
