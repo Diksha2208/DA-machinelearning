@@ -56,8 +56,4 @@ st.header('Top Countries by Total Video Views')
 country_views = filtered_df.groupby('Country')['video views'].sum().nlargest(10)
 st.bar_chart(country_views)
 
-# Display a scatter plot of subscribers vs. video views
-st.header('Subscribers vs. Video Views')
-st.scatter_chart(filtered_df[['subscribers', 'video views']])
-
 
