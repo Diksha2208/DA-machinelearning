@@ -99,9 +99,18 @@ if not df.empty:
 
         # Create the line chart
         st.line_chart(time_series.set_index(time_column)[data_column])
-        
 
-    # Display a bar chart of top YouTubers by subscribers
+
+    
+  create_pie_chart = st.selectbox('Would you like to create a pie chart?', ['Yes', 'No'])
+    if create_pie_chart == 'Yes':
+        category_column = st.selectbox('Select category column for pie chart', df.columns)
+        value_column = st.selectbox('Select value column for pie chart', df.columns)
+
+        # Create the pie chart
+        pie_data = df.groupby(category_column)[value_column].sum().reset_index()
+        fig = px.pie(pie_data, names=category_column, values=value_column, title=f'Pie chart of {value_column} by {category_column}')
+        st.plotly_chart(fig)
     st.header('Top YouTubers by Subscribers')
     top_youtubers = df.nlargest(10, 'subscribers')
     st.bar_chart(top_youtubers.set_index('Youtuber')['subscribers'])
