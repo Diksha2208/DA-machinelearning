@@ -47,12 +47,18 @@ if not df.empty:
     st.write(df.describe())
 
       # Option to use existing rank column or create a new rank
-    use_existing_rank = st.sidebar.checkbox('Use existing rank column', value=True)
+    use_existing_rank = st.sidebar.checkbox('My dataset has Rank colunm', value=True)
     
     # Rank column selection and ranking logic
     if not use_existing_rank:
-        rank_column = st.sidebar.selectbox('Select column to rank by', df.columns)
+        rank_column = st.sidebar.selectbox('Select column to grenerate rank by', df.columns)
         df['rank'] = df[rank_column].rank(method='min', ascending=False)
+
+        # Slider to filter by rank
+    min_rank = int(df['rank'].min())
+    max_rank = int(df['rank'].max())
+    rank_range = st.sidebar.slider('Select rank range', min_rank, max_rank, (min_rank, max_rank))
+
 
     # Display a bar chart of top YouTubers by subscribers
     st.header('Top YouTubers by Subscribers')
