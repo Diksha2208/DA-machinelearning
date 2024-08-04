@@ -58,12 +58,14 @@ if not df.empty:
     min_rank = int(df['rank'].min())
     max_rank = int(df['rank'].max())
     rank_range = st.sidebar.slider('Select rank range', min_rank, max_rank, (min_rank, max_rank))
+    rank_df = df[ (df['rank'] >= rank_range[0]) & 
+                 (df['rank'] <= rank_range[1])]
 
     if use_existing_rank:
-        rank_chart_df = df[['Youtuber', rank_range]].set_index('Youtuber')
+        rank_chart_df = rank_df[['Youtuber', 'rank']].set_index('Youtuber')
         st.bar_chart(rank_chart_df)
     else:
-        rank_chart_df = df[[rank_column, rank_range]].set_index('rank_column')
+        rank_chart_df = rank_df[[rank_column, 'rank']].set_index('rank_column')
         st.bar_chart(rank_chart_df)
    
 
