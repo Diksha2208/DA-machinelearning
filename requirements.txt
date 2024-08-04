@@ -1,4 +1,6 @@
 streamlit
 numpy
 pandas
+pandas-profiling
+streamlit-pandas-profiling
 scikit-learn
