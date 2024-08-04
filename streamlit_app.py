@@ -102,7 +102,7 @@ if not df.empty:
 
 
     
-  create_pie_chart = st.selectbox('Would you like to create a pie chart?', ['Yes', 'No'])
+    create_pie_chart = st.selectbox('Would you like to create a pie chart?', ['Yes', 'No'])
     if create_pie_chart == 'Yes':
         category_column = st.selectbox('Select category column for pie chart', df.columns)
         value_column = st.selectbox('Select value column for pie chart', df.columns)
