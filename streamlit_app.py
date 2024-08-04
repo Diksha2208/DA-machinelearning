@@ -78,7 +78,7 @@ if not df.empty:
         df = df.dropna(subset=[time_column])
 
         # Group by the time column and calculate the count of the data column
-        time_series = df.groupby(time_column)[data_column].sum().reset_index()
+        time_series = df.groupby(time_column)[data_column].count().reset_index()
 
         # Create the line chart
         st.line_chart(time_series.set_index(time_column)[data_column])
