@@ -79,7 +79,7 @@ if not df.empty:
         df[time_column] = pd.to_numeric(df[time_column], errors='coerce')
         df = df.dropna(subset=[time_column])
         df = df.sort_values(by=time_column)
-
+        st.sidebar.header('Line Chart')
   
         # Sidebar selection for year range
         min_year = int(df[time_column].min())
