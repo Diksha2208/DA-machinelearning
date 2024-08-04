@@ -4,7 +4,7 @@ import pandas as pd
 # Function to load the preloaded dataset
 @st.cache
 def load_preloaded_data():
-    data_path = '/mnt/data/Global_YouTube_Statistics.csv'
+    data_path = 'data/Global_YouTube_Statistics.csv'
     df = pd.read_csv(data_path)
     df.columns = df.columns.str.strip()
     df['Country'] = df['Country'].str.title()
