@@ -107,6 +107,7 @@ if not df.empty:
         category_column = st.selectbox('Select category column for pie chart', df.columns)
         value_column = st.selectbox('Select value column for pie chart', df.columns)
         # Sidebar selection for categories to include in the pie chart
+        st.sidebar.header('Pie Chart')
         unique_categories = df[category_column].unique()
         selected_categories_for_pie = st.sidebar.multiselect('Select categories to include in pie chart', unique_categories, unique_categories)
         
