@@ -39,14 +39,8 @@ elif option == "Use YouTube Statistics":
 
 # If DataFrame is not empty, display the data and visualizations
 if not df.empty:
-    st.header('Dataset')
-    st.write(df)
 
-    # Display basic statistics
-    st.header('Basic Statistics')
-    st.write(df.describe())
-
-      # Option to use existing rank column or create a new rank
+          # Option to use existing rank column or create a new rank
     use_existing_rank = st.sidebar.checkbox('My dataset has Rank colunm', value=True)
     
     # Rank column selection and ranking logic
@@ -68,6 +62,14 @@ if not df.empty:
         rank_chart_df = rank_df[rank_column, ['rank']].set_index('rank_column')
         st.bar_chart(rank_chart_df)
    
+    st.header('Dataset')
+    st.write(df)
+
+    # Display basic statistics
+    st.header('Basic Statistics')
+    st.write(df.describe())
+
+
 
 
     # Display a bar chart of top YouTubers by subscribers
