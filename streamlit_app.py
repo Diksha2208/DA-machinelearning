@@ -70,7 +70,7 @@ if not df.empty:
     st.write(df.describe())
 
     
-    create_Line_Bar = st.selectbox('Would you like to Create line chart to display analysis over time?', ['Yes', 'No')
+    create_Line_Bar = st.selectbox('Would you like to Create line chart to display analysis over time?', ['Yes', 'No'])
     if create_Line_Bar == 'Yes':
         time_column = st.selectbox('Select Time colunm', df.columns)
         data_column = st.selectbox('Select colunm you want to display over time', df.columns)
