@@ -92,7 +92,7 @@ if not df.empty:
 
     # Display a bar chart of top countries by total video views
     st.header('Top Countries by Total Video Views')
-    country_views = df.groupby('Country')['video views'].sum().nlargest(10)
+    country_views = df.groupby('Country')['video views'].count().nlargest(10)
     st.bar_chart(country_views)
 
     # Display a scatter plot of subscribers vs. video views
