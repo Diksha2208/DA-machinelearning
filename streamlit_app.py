@@ -75,8 +75,8 @@ if not df.empty:
         time_column = st.selectbox('Select Time colunm', df.columns)
         data_column = st.selectbox('Select colunm you want to display over time', df.columns)
     
-        df = df.sort_values(by=time_column)
-        st.line_chart(df.set_index(time_column)[data_column])
+        
+        st.line_chart(df, x= time_column.unique(), y=data_column.count())
 
         
 
