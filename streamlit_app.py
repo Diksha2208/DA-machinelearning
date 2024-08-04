@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-
+import plotly.express as px
 # Function to load the preloaded dataset
 @st.cache
 def load_preloaded_data():
