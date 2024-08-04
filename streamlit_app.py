@@ -1,12 +1,20 @@
 import streamlit as st
 import pandas as pd
 
-st.title('Machine Learning App')
-
-st.write('This app builds a machine learning model')
-df = pd.read_csv('data/Global_YouTube_Statistics.csv')
-
-
+@st.cache
+def load_data():
+    data_path = '/mnt/data/Global_YouTube_Statistics.csv'
+    df = pd.read_csv(data_path)
+    df.columns = df.columns.str.strip()
+    df['Country'] = df['Country'].str.title()
+    numeric_columns = ['subscribers', 'video views', 'uploads', 'video_views_rank', 
+                       'country_rank', 'channel_type_rank', 'video_views_for_the_last_30_days', 
+                       'lowest_monthly_earnings', 'highest_monthly_earnings', 
+                       'lowest_yearly_earnings', 'highest_yearly_earnings', 'created_year', 'Population']
+    df[numeric_columns] = df[numeric_columns].apply(pd.to_numeric, errors='coerce')
+    df = df.dropna(subset=['subscribers', 'video views', 'uploads'])
+    df = df.drop_duplicates()
+    return df
 
 # Title of the Streamlit app
 st.title('Global YouTube Statistics Dashboard')
