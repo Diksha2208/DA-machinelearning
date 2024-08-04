@@ -74,11 +74,19 @@ if not df.empty:
     if create_Line_Bar == 'Yes':
         time_column = st.selectbox('Select Time colunm', df.columns)
         data_column = st.selectbox('Select colunm you want to display over time', df.columns)
+      
+        # Ensure the time column is numeric
         df[time_column] = pd.to_numeric(df[time_column], errors='coerce')
         df = df.dropna(subset=[time_column])
+        df = df.sort_values(by=time_column)
 
-        # Group by the time column and calculate the count of the data column
-        time_series = df.groupby(time_column)[data_column].sum().reset_index()
+        # Check if the data column is numeric or not
+        if pd.api.types.is_numeric_dtype(df[data_column]):
+            # Sum the values if the data column is numeric
+            time_series = df.groupby(time_column)[data_column].sum().reset_index()
+        else:
+            # Count the occurrences if the data column is not numeric
+            time_series = df.groupby(time_column)[data_column].count().reset_index()
 
         # Create the line chart
         st.line_chart(time_series.set_index(time_column)[data_column])
