@@ -120,7 +120,24 @@ if not df.empty:
         # Create the pie chart
         fig = px.pie(pie_data, names=category_column, values=value_column, title=f'Pie chart of {value_column} by {category_column}')
         st.plotly_chart(fig)
+    create_bar_chart = st.selectbox('Would you like to create a bar chart?', ['Yes', 'No'])
+    if create_bar_chart == 'Yes':
+        category_column = st.selectbox('Select category column for bar chart', df.columns)
+        value_column = st.selectbox('Select value column for bar chart', df.columns)
+
+        # Sidebar selection for categories to include in the bar chart
+        unique_categories = df[category_column].unique()
+        selected_categories_for_bar = st.sidebar.multiselect('Select categories to include in bar chart', unique_categories, unique_categories)
         
+        # Filter the dataframe by the selected categories
+        bar_data = df[df[category_column].isin(selected_categories_for_bar)]
+        
+        # Aggregate the data for the bar chart
+        bar_data = bar_data.groupby(category_column)[value_column].sum().reset_index()
+
+        # Create the bar chart
+        fig = px.bar(bar_data, x=category_column, y=value_column, title=f'Bar chart of {value_column} by {category_column}')
+        st.plotly_chart(fig)
     st.header('Top YouTubers by Subscribers')
     top_youtubers = df.nlargest(10, 'subscribers')
     st.bar_chart(top_youtubers.set_index('Youtuber')['subscribers'])
@@ -134,8 +151,4 @@ if not df.empty:
     st.header('Subscribers vs. Video Views')
     st.scatter_chart(df[['subscribers', 'video views']])
 
-    # Group by category and calculate the mean of video views
-    st.header('Mean of Video Views by Category')
-    mean_video_views_by_category = df.groupby('category')['video views'].mean().reset_index()
-    st.write(mean_video_views_by_category)
-    st.bar_chart(mean_video_views_by_category.set_index('category'))
+ 
