@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-st.cache_data
+@st.cache_data
 def load_data():
     data_path = '/data/Global_YouTube_Statistics.csv'
     df = pd.read_csv(data_path)
