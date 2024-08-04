@@ -46,6 +46,14 @@ if not df.empty:
     st.header('Basic Statistics')
     st.write(df.describe())
 
+      # Option to use existing rank column or create a new rank
+    use_existing_rank = st.sidebar.checkbox('Use existing rank column', value=True)
+    
+    # Rank column selection and ranking logic
+    if not use_existing_rank:
+        rank_column = st.sidebar.selectbox('Select column to rank by', df.columns)
+        df['rank'] = df[rank_column].rank(method='min', ascending=False)
+
     # Display a bar chart of top YouTubers by subscribers
     st.header('Top YouTubers by Subscribers')
     top_youtubers = df.nlargest(10, 'subscribers')
