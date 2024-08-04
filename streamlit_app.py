@@ -10,7 +10,7 @@ def load_data():
     numeric_columns = ['subscribers', 'video views', 'uploads', 'video_views_rank', 
                        'country_rank', 'channel_type_rank', 'video_views_for_the_last_30_days', 
                        'lowest_monthly_earnings', 'highest_monthly_earnings', 
-                       'lowest_yearly_earnings', 'highest_yearly_earnings', 'created_year', 'Population']
+                       'lowest_yearly_earnings', 'highest_yearly_earnings', 'created_year']
     df[numeric_columns] = df[numeric_columns].apply(pd.to_numeric, errors='coerce')
     df = df.dropna(subset=['subscribers', 'video views', 'uploads'])
     df = df.drop_duplicates()
