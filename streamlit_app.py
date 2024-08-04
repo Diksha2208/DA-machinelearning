@@ -59,6 +59,14 @@ if not df.empty:
     max_rank = int(df['rank'].max())
     rank_range = st.sidebar.slider('Select rank range', min_rank, max_rank, (min_rank, max_rank))
 
+    if use_existing_rank:
+        rank_chart_df = filtered_df[['Youtuber', 'rank']].set_index('Youtuber')
+        st.bar_chart(rank_chart_df)
+    else:
+        rank_chart_df = filtered_df[rank_column, 'rank']].set_index('rank_column')
+        st.bar_chart(rank_chart_df)
+   
+
 
     # Display a bar chart of top YouTubers by subscribers
     st.header('Top YouTubers by Subscribers')
