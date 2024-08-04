@@ -80,17 +80,25 @@ if not df.empty:
         df = df.dropna(subset=[time_column])
         df = df.sort_values(by=time_column)
 
+  
+        # Sidebar selection for year range
+        min_year = int(df[time_column].min())
+        max_year = int(df[time_column].max())
+        year_range = st.sidebar.slider('Select year range', min_year, max_year, (min_year, max_year))
+
+        # Filter the dataframe by the selected year range
+        line_df = df[(df[time_column] >= year_range[0]) & (df[time_column] <= year_range[1])]
+
         # Check if the data column is numeric or not
-        if pd.api.types.is_numeric_dtype(df[data_column]):
+        if pd.api.types.is_numeric_dtype(line_df[data_column]):
             # Sum the values if the data column is numeric
-            time_series = df.groupby(time_column)[data_column].sum().reset_index()
+            time_series = line_df.groupby(time_column)[data_column].sum().reset_index()
         else:
             # Count the occurrences if the data column is not numeric
-            time_series = df.groupby(time_column)[data_column].count().reset_index()
+            time_series = line_df.groupby(time_column)[data_column].count().reset_index()
 
         # Create the line chart
         st.line_chart(time_series.set_index(time_column)[data_column])
-
         
 
     # Display a bar chart of top YouTubers by subscribers
