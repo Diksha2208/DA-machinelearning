@@ -74,6 +74,11 @@ if not df.empty:
     if create_Line_Bar == 'Yes':
         time_column = st.selectbox('Select Time colunm', df.columns)
         data_column = st.selectbox('Select colunm you want to display over time', df.columns)
+    
+        df = df.sort_values(by=time_column)
+        st.line_chart(df.set_index(time_column)[data_column])
+
+        
 
     # Display a bar chart of top YouTubers by subscribers
     st.header('Top YouTubers by Subscribers')
