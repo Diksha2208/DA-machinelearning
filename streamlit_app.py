@@ -63,7 +63,7 @@ if not df.empty:
         rank_chart_df = filtered_df[['Youtuber', 'rank']].set_index('Youtuber')
         st.bar_chart(rank_chart_df)
     else:
-        rank_chart_df = filtered_df[rank_column, 'rank']].set_index('rank_column')
+        rank_chart_df = filtered_df[[rank_column, 'rank']].set_index('rank_column')
         st.bar_chart(rank_chart_df)
    
 
