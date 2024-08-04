@@ -106,11 +106,20 @@ if not df.empty:
     if create_pie_chart == 'Yes':
         category_column = st.selectbox('Select category column for pie chart', df.columns)
         value_column = st.selectbox('Select value column for pie chart', df.columns)
+        # Sidebar selection for categories to include in the pie chart
+        unique_categories = df[category_column].unique()
+        selected_categories_for_pie = st.sidebar.multiselect('Select categories to include in pie chart', unique_categories, unique_categories)
+        
+        # Filter the dataframe by the selected categories
+        pie_data = df[df[category_column].isin(selected_categories_for_pie)]
+        
+        # Aggregate the data for the pie chart
+        pie_data = pie_data.groupby(category_column)[value_column].sum().reset_index()
 
         # Create the pie chart
-        pie_data = df.groupby(category_column)[value_column].sum().reset_index()
         fig = px.pie(pie_data, names=category_column, values=value_column, title=f'Pie chart of {value_column} by {category_column}')
         st.plotly_chart(fig)
+        
     st.header('Top YouTubers by Subscribers')
     top_youtubers = df.nlargest(10, 'subscribers')
     st.bar_chart(top_youtubers.set_index('Youtuber')['subscribers'])
