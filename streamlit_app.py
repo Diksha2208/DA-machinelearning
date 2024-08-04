@@ -18,8 +18,10 @@ rank_df = df[(df['rank'] >= rank_range[0]) &
                  (df['rank'] <= rank_range[1])]
 
 rank_df
-st.header('Top Youtube Channels by the Rank ')
-st.bar_chart(rank_df, x=rank_df['Youtuber'],y=rank_range)
+# Display a bar chart of top YouTube channels by rank
+st.header('Top YouTube Channels by Rank')
+rank_chart_df = rank_df[['Youtuber', 'rank']].set_index('Youtuber')
+st.bar_chart(rank_chart_df)
 
 # Sidebar for user input
 st.sidebar.header('Filter Options')
