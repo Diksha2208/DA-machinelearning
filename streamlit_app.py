@@ -17,7 +17,6 @@ if option == "Load a dataset":
     uploaded_file = st.sidebar.file_uploader("Upload a dataset (CSV file)", type=["csv"])
     if uploaded_file is not None:
         df = pd.read_csv(uploaded_file)
-        pr = df.profile_report()
         st.header("**Dataset:**")
         st.write(df)
         if st.sidebar.button("Generate Report"):
@@ -32,9 +31,9 @@ elif option == "Use example dataset":
     if dataset == "YouTube dataset":
         df = load_example_data("data/Global_YouTube_Statistics.csv")  # Replace with actual path to your dataset
     
-    st.header("**Dataset:**")
-    st.write(df)
-    if st.sidebar.button("Generate Report"):
-        st.write("---")
-        st.header("**Pandas Profiling Report**")
-        st_profile_report(pr)
+st.header("**Dataset:**")
+st.write(df)
+if st.sidebar.button("Generate Report"):
+    st.write("---")
+    st.header("**Pandas Profiling Report**")
+    st.write(dataframe)
