@@ -138,9 +138,16 @@ if not df.empty:
         # Create the bar chart
         fig = px.bar(bar_data, x=category_column, y=value_column, title=f'Bar chart of {value_column} by {category_column}')
         st.plotly_chart(fig)
+    
     st.header('Top YouTubers by Subscribers')
-    top_youtubers = df.nlargest(10, 'subscribers')
-    st.bar_chart(top_youtubers.set_index('Youtuber')['subscribers'])
+    top_n = st.sidebar.slider('Select number of top YouTubers', min_value=1, max_value=50, value=10)
+    x_axis_column = st.sidebar.selectbox('Select column for x-axis (string fields)', df.select_dtypes(include=['object']).columns)
+    y_axis_column = st.sidebar.selectbox('Select column for y-axis (numeric fields)', df.select_dtypes(include=['number']).columns)
+    
+    top_youtubers = df.nlargest(top_n, y_axis_column)
+    fig = px.bar(top_youtubers, x=x_axis_column, y=y_axis_column, title=f'Top {top_n} by {y_axis_column}')
+    st.plotly_chart(fig)
+    
 
     # Display a bar chart of top countries by total video views
     st.header('Top Countries by Total Video Views')
