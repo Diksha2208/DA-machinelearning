@@ -140,14 +140,18 @@ if not df.empty:
         st.plotly_chart(fig)
     
     st.header('Top YouTubers by Subscribers')
-    top_n = st.sidebar.slider('Select number of top YouTubers', min_value=1, max_value=50, value=10)
+    top_bottom = st.sidebar.selectbox('Select Top or Bottom', ['Top', 'Bottom'])
+    top_n = st.sidebar.slider('Select number of YouTubers', min_value=1, max_value=50, value=10)
     x_axis_column = st.sidebar.selectbox('Select column for x-axis (string fields)', df.select_dtypes(include=['object']).columns)
     y_axis_column = st.sidebar.selectbox('Select column for y-axis (numeric fields)', df.select_dtypes(include=['number']).columns)
-    
-    top_youtubers = df.nlargest(top_n, y_axis_column)
-    fig = px.bar(top_youtubers, x=x_axis_column, y=y_axis_column, title=f'Top {top_n} by {y_axis_column}')
+
+    if top_bottom == 'Top':
+        youtubers = df.nlargest(top_n, y_axis_column)
+    else:
+        youtubers = df.nsmallest(top_n, y_axis_column)
+
+    fig = px.bar(youtubers, x=x_axis_column, y=y_axis_column, title=f'{top_bottom} {top_n} by {y_axis_column}')
     st.plotly_chart(fig)
-    
 
     # Display a bar chart of top countries by total video views
     st.header('Top Countries by Total Video Views')
