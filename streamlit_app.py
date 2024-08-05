@@ -153,13 +153,5 @@ if not df.empty:
     fig = px.bar(youtubers, x=x_axis_column, y=y_axis_column, title=f'{top_bottom} {top_n} by {y_axis_column}')
     st.plotly_chart(fig)
 
-    # Display a bar chart of top countries by total video views
-    st.header('Top Countries by Total Video Views')
-    country_views = df.groupby('Country')['video views'].count().nlargest(10)
-    st.bar_chart(country_views)
-
-    # Display a scatter plot of subscribers vs. video views
-    st.header('Subscribers vs. Video Views')
-    st.scatter_chart(df[['subscribers', 'video views']])
 
  
