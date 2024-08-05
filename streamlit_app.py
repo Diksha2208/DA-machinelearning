@@ -67,7 +67,7 @@ if not df.empty:
         rank_chart_df = rank_df[[df[rank_data_column], 'rank']].set_index(rankdata_column)
         st.bar_chart(rank_chart_df)
     else:
-        rank_chart_df =  rrank_df[[df[rank_data_column], 'rank']].set_index(rankdata_column)
+        rank_chart_df =  rank_df[[df[rank_data_column], 'rank']].set_index(rankdata_column)
         st.bar_chart(rank_chart_df)
    
     st.header('Dataset')
