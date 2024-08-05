@@ -48,27 +48,26 @@ if not df.empty:
           # Option to use existing rank column or create a new rank
     use_existing_rank = st.sidebar.checkbox('My dataset has Rank colunm', value=True)
     
-    # Rank column selection and ranking logic
     if not use_existing_rank:
-        rank_column = st.sidebar.selectbox('Select column to grenerate rank by', df.columns)
+        rank_column = st.sidebar.selectbox('Select column to generate rank by', df.columns)
         df['rank'] = df[rank_column].rank(method='min', ascending=False)
 
-        # Slider to filter by rank
+    # Slider to filter by rank
     min_rank = int(df['rank'].min())
     max_rank = int(df['rank'].max())
     rank_range = st.sidebar.slider('Select rank range', min_rank, max_rank, (min_rank, max_rank))
-    rank_df = df[ (df['rank'] >= rank_range[0]) & 
-                 (df['rank'] <= rank_range[1])]
     
+    rank_df = df[(df['rank'] >= rank_range[0]) & (df['rank'] <= rank_range[1])]
     
-    rankd_ata_column = st.selectbox('Select colunm you want to display with rank', df.columns)
+    rank_data_column = st.selectbox('Select column you want to display with rank', df.columns)
 
     if use_existing_rank:
-        rank_chart_df = rank_df[[df[rank_data_column], 'rank']].set_index(rank_data_column)
-        st.bar_chart(rank_chart_df)
+        rank_chart_df = rank_df[[rank_data_column, 'rank']].set_index(rank_data_column)
     else:
-        rank_chart_df =  rank_df[[df[rank_data_column], 'rank']].set_index(rank_data_column)
-        st.bar_chart(rank_chart_df)
+        rank_chart_df = rank_df[[rank_data_column, 'rank']].set_index(rank_data_column)
+    
+    st.bar_chart(rank_chart_df)
+
    
     st.header('Dataset')
     st.write(df)
