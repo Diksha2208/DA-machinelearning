@@ -36,6 +36,7 @@ if option == "Upload a CSV file":
 elif option == "Use YouTube Statistics":
     df = load_preloaded_data()
     st.success("Loaded YouTube Statistics dataset!")
+    
 elif option == "Use USA Housing":
     data_path = 'data/USA_Housing.csv.csv'
     df = pd.read_csv(data_path)
