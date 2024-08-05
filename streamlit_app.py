@@ -59,12 +59,15 @@ if not df.empty:
     rank_range = st.sidebar.slider('Select rank range', min_rank, max_rank, (min_rank, max_rank))
     rank_df = df[ (df['rank'] >= rank_range[0]) & 
                  (df['rank'] <= rank_range[1])]
+    
+    
+    drankdata_column = st.selectbox('Select colunm you want to display with rank', df.columns)
 
     if use_existing_rank:
-        rank_chart_df = rank_df[['Youtuber', 'rank']].set_index('Youtuber')
+        rank_chart_df = rank_df[[df[rank_data_column], 'rank']].set_index(rankdata_column)
         st.bar_chart(rank_chart_df)
     else:
-        rank_chart_df =  rank_df[['Youtuber', 'rank']].set_index('Youtuber')
+        rank_chart_df =  rrank_df[[df[rank_data_column], 'rank']].set_index(rankdata_column)
         st.bar_chart(rank_chart_df)
    
     st.header('Dataset')
