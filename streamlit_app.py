@@ -18,7 +18,7 @@ def load_preloaded_data():
     return df
 
 # Title of the Streamlit app
-st.title('Global YouTube Statistics Dashboard')
+st.title('Statistics Dashboard')
 
 # Main screen options
 st.header("Choose a dataset")
