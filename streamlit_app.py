@@ -61,13 +61,13 @@ if not df.empty:
                  (df['rank'] <= rank_range[1])]
     
     
-    drankdata_column = st.selectbox('Select colunm you want to display with rank', df.columns)
+    rankd_ata_column = st.selectbox('Select colunm you want to display with rank', df.columns)
 
     if use_existing_rank:
-        rank_chart_df = rank_df[[df[rank_data_column], 'rank']].set_index(rankdata_column)
+        rank_chart_df = rank_df[[df[rank_data_column], 'rank']].set_index(rank_data_column)
         st.bar_chart(rank_chart_df)
     else:
-        rank_chart_df =  rank_df[[df[rank_data_column], 'rank']].set_index(rankdata_column)
+        rank_chart_df =  rank_df[[df[rank_data_column], 'rank']].set_index(rank_data_column)
         st.bar_chart(rank_chart_df)
    
     st.header('Dataset')
