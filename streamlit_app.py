@@ -22,7 +22,7 @@ st.title('Statistics Dashboard')
 
 # Main screen options
 st.header("Choose a dataset")
-option = st.selectbox("Select an option:", ("Upload a CSV file", "Use YouTube Statistics"))
+option = st.selectbox("Select an option:", ("Upload a CSV file", "Use YouTube Statistics", "Use USA Housing"))
 
 # Initialize an empty DataFrame
 df = pd.DataFrame()
